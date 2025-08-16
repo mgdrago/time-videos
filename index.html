@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Time Management Videos (Class 7–8 friendly)</title>
+<style>
+  body{font-family:system-ui,Arial;margin:24px;background:#fff;color:#111}
+  h1{margin:0 0 12px}
+  .sub{color:#555;margin-bottom:16px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 20px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .card{border:1px solid #eee;border-radius:12px;padding:12px;background:#fff}
+  .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px}
+  .meta{font-size:12px;color:#555;margin:4px 0 8px}
+  input,select,button{padding:8px;border:1px solid #ddd;border-radius:8px}
+  button{cursor:pointer}
+</style>
+</head>
+<body>
+  <h1>Time Management Videos (Easy English)</h1>
+  <div class="sub">From TEDx, top universities (Harvard, Oxford, IITs, AIIMS), and famous authors. Short, simple, student-friendly.</div>
+
+  <div class="filters">
+    <select id="source">
+      <option value="">All Sources</option>
+      <option value="TEDx">TEDx</option>
+      <option value="Harvard">Harvard</option>
+      <option value="Oxford">Oxford</option>
+      <option value="IIT">IIT</option>
+      <option value="AIIMS">AIIMS</option>
+      <option value="B-School">B-School</option>
+      <option value="Author">Author</option>
+    </select>
+    <input id="q" placeholder="Search title (e.g., habits)" />
+    <button id="go">Search</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+<script>
+async function load() {
+  const res = await fetch('./videos.json', {cache:'no-store'});
+  let vids = await res.json();
+  const src = document.getElementById('source').value.trim().toLowerCase();
+  const q = document.getElementById('q').value.trim().toLowerCase();
+
+  if (src) vids = vids.filter(v => (v.source||"").toLowerCase().includes(src));
+  if (q) vids = vids.filter(v => (v.title||"").toLowerCase().includes(q));
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = vids.map(v => `
+    <div class="card">
+      <img class="thumb" src="${v.thumbnail}" alt="${v.title} thumbnail" loading="lazy" />
+      <div class="meta">${v.source || 'Source'} • ${new Date(v.publishDate).toLocaleDateString()}</div>
+      <strong>${v.title}</strong>
+      <div style="margin-top:8px">
+        <iframe width="100%" style="aspect-ratio:16/9;border:0;border-radius:8px"
+          src="https://www.youtube.com/embed/${v.videoId}" allowfullscreen></iframe>
+      </div>
+    </div>
+  `).join('');
+}
+document.getElementById('go').addEventListener('click', load);
+load();
+</script>
+</body>
+</html>

@@ -3,12 +3,23 @@ import fetch from "node-fetch";
 import { XMLParser } from "fast-xml-parser";
 
 const CHANNELS = [
-  // Put approved channels here with a readable label
-  // TEDx (example, real ID below)
   { id: "UCsT0YIqwnpJCM-mx7-gSA4Q", source: "TEDx" },
-  // Add: Harvard, Oxford, IITs, AIIMS, StanfordGSB, Wharton, authors...
-  // { id: "REPLACE_WITH_CHANNEL_ID", source: "Harvard" },
+  { id: "UCKJyv_uNh3LhYFKmwaB63bA", source: "Harvard" },
+  { id: "UCHIqMEje_NFJ2u24CVaNQvg", source: "Oxford Saïd" },
+  { id: "UCZgwOAjweG6NZKX5VWXLQLw", source: "IIT Madras" },
+  { id: "UCT0-V_Z5-MuwN5fpbO-25Ag", source: "AIIMS" },
+  { id: "UC3UPXvR5TAVFL18ACyoW0RQ", source: "Author: James Clear" },
+  { id: "UCIhJnsJ0IHlVNnYfp-gw_5Q", source: "Author: Cal Newport" },
+  { id: "UCc11676iKpKrJMYqNYHqNig", source: "Author: Brian Tracy" },
+  { id: "UCRXz_Dh-KJQ1YpIHH-btzTw", source: "FranklinCovey" },
+  { id: "UCLv7Gzc3VTO6ggFlXY0sOyw", source: "Harvard University" },
+  { id: "UCK8f1CUe8y403u3b0gCINww", source: "University of Oxford" },
+  { id: "UCjlMin_D2Bg6mgocPRSAzRw", source: "IIT Bombay Official Channel" },
+  { id: "UCJX9RwRoVAEFLWlhrNF3Lqg", source: "IIT Delhi" },
+  { id: "UCKJyv_uNh3LhYFKmwaB63bA", source: "Harvard" },
+  // For links marked (view-source), add their IDs the same way and append here.
 ];
+
 
 const KEYWORDS = [
   "time management","study","schedule","planner","planning",
